@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>my game</title>
+    <link rel="icon" href="img/favicon.png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <style>
+    #gameScreen {
+      display: none;
+    }
+  </style>
+  
+  </head>
+  <body>
+    <div id="initialScreen" class="h-100">
+      <div class="d-flex flex-column align-items-center justify-content-center h-100">
+          <h1>HAPEBEAST CONNECT 4</h1>
+          <button
+            type="submit"
+            class="btn btn-success"
+            id="newGameButton"
+          >
+            Create New Game
+          </button>
+          <div>OR</div>
+          <div class="form-group">
+            <input type="text" placeholder="Enter Game Code" id="gameCodeInput"/>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-success"
+            id="joinGameButton"
+          >
+            Join Game
+          </button>
+      </div>
+    </div>
+
+
+    <div id="gameScreen" class="h-100">
+      <div class="d-flex flex-column align-items-center justify-content-center h-100">
+
+        <h1>Your game code is: <span id="gameCodeDisplay"></span></h1>
+
+        <canvas height="600" width="700"></canvas>
+      </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="src/client.js"></script>
+  </body>
+</html>
