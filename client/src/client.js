@@ -76,7 +76,7 @@ function gameOver(number){
   }
 }
 
-const sock = io("https://polar-anchorage-28299.herokuapp.com/");
+const sock = io("https://polar-anchorage-28299.herokuapp.com2323/");
 sock.on('init', handleInit);
 sock.on('gameCode', handleGameCode)
 sock.on('unknownGame', handleUnknownGame)
