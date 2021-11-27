@@ -13,11 +13,7 @@
     "Game",
     "Socket.IO"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Juriy/game-demo.git"
-  },
-  "author": "Juriy Bura <juriy.bura@gmail.com>",
+  "author": "Sebastjan",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
