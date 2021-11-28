@@ -7,7 +7,9 @@ const createCooldown = require('./create-cooldown');
 
 const app = express();
 
-app.use(express.static(`${__dirname}/../client`));
+//app.use(express.static(`${__dirname}/../client`));
+app.use(express.static(`http://hape-games.fun/Connect4/client`))
+
 
 const server = http.createServer(app);
 const io = socketio(server);
