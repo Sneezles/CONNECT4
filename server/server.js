@@ -3,13 +3,11 @@ const express = require('express');
 const socketio = require('socket.io');
 const randomColor = require('randomcolor');
 const createBoard = require('./create-board');
-const createCooldown = require('./create-cooldown');
+
 
 const app = express();
 
-//app.use(express.static(`${__dirname}/../client`));
 app.use(express.static(`http://hape-games.fun/Connect4/client`))
-
 
 const server = http.createServer(app);
 const io = socketio(server);
@@ -31,11 +29,7 @@ function makeid(length) {
 }
 
 io.on('connection', (sock) => {
-  sock.emit('init', "Hello World")
   const color = randomColor();
-  const cooldown = createCooldown(50); //COLDOWN MENJAMO
-  //sock.emit('board', getBoard()); //TO IN COLOR morm
-
 
   sock.on('newGame',handleNewGame)
   function handleNewGame(){
@@ -85,7 +79,7 @@ io.on('connection', (sock) => {
     //When the second player joins, the board is created and emitted
     
     allboards[gameCode] =  new createBoard(7)
-    io.sockets.in(gameCode).emit('board', allboards[gameCode].board);
+    io.sockets.in(gameCode).emit('restart', 'START');
   }
 
 
@@ -123,13 +117,29 @@ io.on('connection', (sock) => {
       if (playerWon) {
         //var clients_in_the_room = io.sockets.in(clientRooms[sock.id]); 
         //console.log(Object.keys(clients_in_the_room.sockets))
-
-        io.sockets.in(clientRooms[sock.id])
-          .emit('gameover', sock.number);
+        setTimeout(function(){
+          io.sockets.in(clientRooms[sock.id])
+            .emit('gameover', sock.number);
       
-        boardclass.clear();
-        io.sockets.in(clientRooms[sock.id])
-          .emit('board');
+          boardclass.clear();
+          boardclass.boardcount = 0;
+          io.sockets.in(clientRooms[sock.id])
+            .emit('restart');
+        },30);
+      }
+
+      if(boardclass.boardcount==42) {//Its a tie
+
+        setTimeout(function(){
+          io.sockets.in(clientRooms[sock.id])
+            .emit('gameover', 42);
+      
+          boardclass.clear();
+          boardclass.boardcount = 0;
+          io.sockets.in(clientRooms[sock.id])
+            .emit('restart');
+        },30);
+
       }
     }
   });
@@ -140,7 +150,7 @@ server.on('error', (err) => {
   console.error(err);
 });
 
-server.listen(process.env.PORT || 8080, () => {
+server.listen(8080, () => {
   console.log('server is ready');
 });
 

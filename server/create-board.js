@@ -2,6 +2,7 @@ class createBoard {
   constructor(size){
     this.size = size
     this.board = Array(size).fill().map(() => Array(size).fill(null));
+    this.boardcount = 0;
   }
   clear(){
     this.board = Array(this.size).fill().map(() => Array(this.size).fill(null));
@@ -41,6 +42,8 @@ class createBoard {
   makeTurn(x,y,color) {
     if(!this.board[y][x]){
       this.board[y][x] = color;
+      this.boardcount += 1
+      console.log(this.boardcount)
     }
     return this.isWinningTurn(x, y);
   }
