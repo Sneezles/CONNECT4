@@ -125,7 +125,7 @@ io.on('connection', (sock) => {
           boardclass.boardcount = 0;
           io.sockets.in(clientRooms[sock.id])
             .emit('restart');
-        },30);
+        },60);
       }
 
       if(boardclass.boardcount==42) {//Its a tie
@@ -138,7 +138,7 @@ io.on('connection', (sock) => {
           boardclass.boardcount = 0;
           io.sockets.in(clientRooms[sock.id])
             .emit('restart');
-        },30);
+        },60);
 
       }
     }
