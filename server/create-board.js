@@ -1,11 +1,11 @@
 class createBoard {
   constructor(size){
     this.size = size
-    this.board = Array(size).fill().map(() => Array(size).fill(null));
+    this.board = Array(6).fill().map(() => Array(7).fill(null));
     this.boardcount = 0;
   }
   clear(){
-    this.board = Array(this.size).fill().map(() => Array(this.size).fill(null));
+    this.board = Array(6).fill().map(() => Array(7).fill(null));
   }
 
   inBounds(x, y) {
@@ -66,6 +66,9 @@ class createBoard {
             realy=i-1
             break;
           }
+        }
+        if(realy==y){
+          validmove=false
         }
       }
       if(y==0){
