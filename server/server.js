@@ -85,7 +85,9 @@ io.on('connection', (sock) => {
 
   sock.on('turn', ({ x, y }) => {
       boardclass = allboards[clientRooms[sock.id]]
-      var turn = turnstate[clientRooms[sock.id]][sock.number-1]
+      if (clientRooms[sock.id] && turnstate[clientRooms[sock.id]]) {
+        var turn = turnstate[clientRooms[sock.id]][sock.number-1]
+      }
 
     if (turn) {
       boardclass = allboards[clientRooms[sock.id]]
